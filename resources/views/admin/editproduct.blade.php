@@ -29,7 +29,7 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Add Product</h3>
+                <h3 class="card-title">Edit Product</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -51,21 +51,22 @@
                 </div>
                 @endif
                 
-                {!!Form::open(['action' => 'App\Http\Controllers\ProductController@saveproduct', 'method' => 'POST', 'enctype' => 'multipart/form-data'])!!}
+                {!!Form::open(['action' => 'App\Http\Controllers\ProductController@updateproduct', 'method' => 'POST', 'enctype' => 'multipart/form-data'])!!}
                 {{ csrf_field()}}
                 <div class="card-body">
                   <div class="form-group">
+                    {{Form::hidden('id', $products->id)}}
                     {{-- <label for="exampleInputEmail1">Product Name</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Product Name">
                      --}}
                      {{Form::label('', 'Product Name', ['for' => 'exampleInputEmail1'])}}
-                    {{Form::text('product_name', '', ['class' => 'form-control', 'id' => 'exampleInputEmail1', 'placeholder' => 'Enter Product Name' ])}}
+                    {{Form::text('product_name', $products->product_name, ['class' => 'form-control', 'id' => 'exampleInputEmail1', 'placeholder' => 'Enter Product Name' ])}}
                   </div>
                   <div class="form-group">
                     {{-- <label for="exampleInputEmail1">Product Price</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Product Price" min="1"> --}}
                     {{Form::label('', 'Product Price', ['for' => 'exampleInputEmail1'])}}
-                    {{Form::text('product_price', '', ['class' => 'form-control', 'id' => 'exampleInputEmail1', 'placeholder' => 'Enter Product Price' ])}}
+                    {{Form::text('product_price', $products->product_price, ['class' => 'form-control', 'id' => 'exampleInputEmail1', 'placeholder' => 'Enter Product Price' ])}}
                   </div>
 
                   <div class="form-group">
@@ -76,7 +77,7 @@
                     <option>Painting</option>#
                    </select> --}}
 
-                   {{Form::select('product_category', $categories, null, ['placeholder' => 'Select Category', 'class' =>'form-control select2'])}}
+                   {{Form::select('product_category', $categories, $products->category, [ 'class' =>'form-control select2'])}}
 
                   </div>
                   {{-- <div class="form-group"> --}}
@@ -101,7 +102,7 @@
 
                 <div class="card-footer">
                   {{-- <button type="submit" class="btn btn-danger">Save</button> --}}
-                  {{Form::submit('Save', ['class' => 'btn btn-success' ])}}
+                  {{Form::submit('Update', ['class' => 'btn btn-success' ])}}
                 </div>
                 {!!Form::close()!!}
               </form>

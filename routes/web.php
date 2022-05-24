@@ -28,7 +28,9 @@ Route::get('/addslider', [SliderController::class, 'addslider']);
 Route::get('/sliders', [SliderController::class, 'sliders']);
 
 Route::get('/products', [ProductController::class, 'products']);
-
+Route::post('/saveproduct', [ProductController::class, 'saveproduct']);
+Route::get('/editproduct/{id}', [ProductController::class, 'editproduct']);
+Route::post('/updateproduct', [ProductController::class, 'updateproduct']);
 Route::get('/addproduct', [ProductController::class, 'addproduct']);
 
 

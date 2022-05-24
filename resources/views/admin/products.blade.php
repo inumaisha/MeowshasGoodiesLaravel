@@ -1,5 +1,6 @@
 @extends('adminLayout.admin')
 @section('content')
+{{Form::hidden('', $increment =  1)}}
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -25,7 +26,12 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">All Products</h3>
+          <h3 class="card-title">All Products</h3> </div>
+          @if (Session::has('status'))
+          <div class="alert alert-success">
+           {{Session::get('status')}}
+          </div>
+          @endif
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -61,69 +67,37 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr>
-                      <td>
-                          1
-                      </td>
-                      <td>
-                          <img src="backend/dist/img/hellokitty.png" style="height : 50px;
-                          width : 50px" class="img-circle elevation-2" alt="User Image">
-                      </td>
-                      <td>HELLO KITTY PLUSH</TD>
-                <td> Cute Crochet 
-                      </td>
-                      <td> 5</td>
 
-                    
-                      </td>
-                      <td>
-                          <a class="btn btn-warning" href="#">
-                              Activate
-                          </a>
-                          <a class="btn btn-info btn-sm" href="#">
-                              <i class="fas fa-pencil-alt">
-                              </i>
-                              Edit
-                          </a>
-                          <a class="btn btn-danger btn-sm" href="#">
-                              <i class="fas fa-trash">
-                              </i>
-                              Delete
-                          </a>
-                      </td>
-                  </tr>
-                 
-                  <tr>
-                    <td>
-                        2
-                    </td>
-                    <td>
-                        <img src="backend/dist/img/user2-160x160.jpg" style="height : 50px;
-                        width : 50px" class="img-circle elevation-2" alt="User Image">
-                    </td>
-                    <td>HELLO KITTY PLUSH</TD>
-              <td> Cute Crochet
-                    </td>
-                    <td> 5</td>
-
+                @foreach($products as $product)
+                <tr>
+                  <td>
+                      {{$increment}}
+                  </td>
+                  <td><img src="/storage/product_images/{{$product->product_image}}" style="height : 50px; width : 50px" class="img-square elevation-2" alt="User Image"</td>
+                  <td>{{$product->product_name}}</TD>
+            <td>{{$product->product_category}}</td>
+                  <td>{{'£' .$product->product_price}}</td>
+            <td>
+                      <a class="btn btn-warning" href="#">
+                          Activate
+                      </a>
+                      <a class="btn btn-info btn-sm" href="{{url('/editproduct/'.$product->id)}}">
+                          <i class="fas fa-pencil-alt">
+                          </i>
+                          Edit
+                      </a>
+                      <a class="btn btn-danger btn-sm" href="#">
+                          <i class="fas fa-trash">
+                          </i>
+                          Delete
+                      </a>
+                  </td>
+              </tr>
+              {{Form::hidden('', $increment = $increment + 1)}}
+                @endforeach
                   
-                    </td>
-                    <td>
-                        <a class="btn btn-success" href="#">
-                            Unactivate
-                        </a>
-                        <a class="btn btn-info btn-sm" href="#">
-                            <i class="fas fa-pencil-alt">
-                            </i>
-                            Edit
-                        </a>
-                        <a class="btn btn-danger btn-sm" href="#">
-                            <i class="fas fa-trash">
-                            </i>
-                            Delete
-                        </a>
-                    </td>
-                  </tr>
+                 
+                 
               </tbody>
           </table>
         </div>
