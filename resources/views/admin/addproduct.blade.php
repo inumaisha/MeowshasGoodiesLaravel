@@ -33,7 +33,9 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form id="quickform">
+              {{-- <form id="quickform"> --}}
+                {!!Form::open(['action' => 'App\Http\Controllers\ProductController@saveproduct', 'method' => 'POST', 'enctype' => 'multipart/form-data'])!!}
+                {{ csrf_field()}}
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Product Name</label>

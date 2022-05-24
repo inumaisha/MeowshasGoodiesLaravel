@@ -1,6 +1,7 @@
 @extends('adminLayout.admin')
 @section('content')
 
+{{Form::hidden('', $increment = 1)}}
 
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
@@ -32,6 +33,13 @@
                 <h3 class="card-title">All Categories</h3>
               </div>
               <!-- /.card-header -->
+
+              @if (Session::has('status'))
+              <div class="alert alert-success">
+               {{Session::get('status')}}
+              </div>
+              @endif
+
                 <div class="card-body">
                   <table id="example1" class="table table-bordered table-striped">
                       <thead>
@@ -42,28 +50,21 @@
                           </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td><td>Internet Explorer 4.0</td>
-                                <td>
-                                <a href="#" class="btn btn-primary"><i class="nav-icon fas fa-edit"></i></a>
-                                <a href="#" id="delete" class="btn btn-danger"><i class="nav-icon fas fa-trash"></i></a>
-                                </td>
+                              @foreach ($categories as $category)
+                              <tr>
+                              <td>{{$increment}}</td>
+                              <td>{{$category->category_name}}</td>
+                              <td>
+                              <a href="{{url('/edit_category/'.$category->id)}}" class="btn btn-primary"><i class="nav-icon fas fa-edit"></i></a>
+                              <a href="{{url('/delete_category/'.$category->id)}}" id="delete" class="btn btn-danger"><i class="nav-icon fas fa-trash"></i></a>
+                              </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Internet Explorer 5.0</td>
-                                <td>
-                                <a href="#" class="btn btn-primary"><i class="nav-icon fas fa-edit"></i></a>
-                                <a href="#" id="delete" class="btn btn-danger"><i class="nav-icon fas fa-trash"></i></a>
-                                </td>
-                            </tr>
+                            {{Form::hidden('', $increment = $increment + 1)}}
+                              @endforeach
+                              
+                            
                         </tbody>
                         <tfoot>
-                            <tr>
-                                <th>Num</th>
-                                <th>Category Name</th>
-                                <th>Actions</th>
-                            </tr>
                         </tfoot>
                   </table>
                 </div>
@@ -103,7 +104,7 @@
 <script src="backend/dist/js/bootbox.min.js"></script>
 
 <script>
-    $(document).on("click", "#delete", function(e){
+    $(document).on("click", "delete", function(e){
       e.preventDefault();
       var link = $(this).attr("href");
       bootbox.confirm("Do you really want to delete this element?", function(confirmed){

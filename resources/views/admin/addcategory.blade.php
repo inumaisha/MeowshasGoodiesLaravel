@@ -32,22 +32,44 @@
               <div class="card-header">
                 <h3 class="card-title">Add Category</h3>
               </div>
+
+              @if (Session::has('status'))
+              <div class="alert alert-success">
+               {{Session::get('status')}}
+              </div>
+              @endif
+
+              @if (count($errors) > 0)
+              <div class="alert alert-danger">
+                <ul>
+                  @foreach ($errors->all() as $error)
+                  <li>{{$error}}</li>
+                  @endforeach
+                </ul>
+              </div>
+              @endif
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              {{-- <form> --}}
+                {!!Form::open(['action' => 'App\Http\Controllers\CategoryController@savecategory', 'method' => 'POST'])!!}
+                {{ csrf_field()}}
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Category</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Category">
+                    {{-- <label for="exampleInputEmail1">Category Name</label> --}}
+                    {{Form::label('', 'Category Name', ['for' => 'exampleInputEmail1'])}}
+                    {{Form::text('category_name', '', ['class' => 'form-control', 'id' => 'exampleInputEmail1', 'placeholder' => 'Enter Category' ])}}
+                    {{-- <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Category"> --}}
                   </div>
                  
                  
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Save</button>
+                  {{-- <button type="submit" class="btn btn-primary">Save</button> --}}
+                  {{Form::submit('Save', ['class' => 'btn btn-primary' ])}}
                 </div>
-              </form>
+                {!!Form::close()!!}
+              {{-- </form> --}}
             </div>
             <!-- /.card -->
 

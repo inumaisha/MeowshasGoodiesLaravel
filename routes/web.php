@@ -18,12 +18,18 @@ use App\Http\Controllers\ProductController;
 */
 Route::get('/admin', [AdminController::class, 'admin']);
 Route::get('/addcategory', [CategoryController::class, 'addcategory']);
+Route::post('/savecategory', [CategoryController::class, 'savecategory']);
 Route::get('/categories', [CategoryController::class, 'categories']);
+Route::get('/edit_category/{id}', [CategoryController::class, 'edit_category']);
+Route::post('/updatecategory', [CategoryController::class, 'updatecategory']);
+Route::get('/delete_category/{id}', [CategoryController::class, 'delete_category']);
 
 Route::get('/addslider', [SliderController::class, 'addslider']);
 Route::get('/sliders', [SliderController::class, 'sliders']);
 
 Route::get('/products', [ProductController::class, 'products']);
+
+Route::get('/addproduct', [ProductController::class, 'addproduct']);
 
 
 Route::get('/', [ClientController::class, 'home']);

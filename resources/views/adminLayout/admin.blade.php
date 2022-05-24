@@ -8,11 +8,11 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="backend/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="{{asset('backend/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- IonIcons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="backend/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="{{asset('backend/dist/css/adminlte.min.css')}}">
 
  @yield('style')
 </head>
@@ -47,17 +47,17 @@
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="backend/plugins/jquery/jquery.min.js"></script>
+<script src="{{asset('backend/plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap -->
-<script src="backend/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE -->
-<script src="backend/dist/js/adminlte.js"></script>
+<script src="{{asset('backend/dist/js/adminlte.js')}}"></script>
 
 <!-- OPTIONAL SCRIPTS -->
-<script src="backend/plugins/chart.js/Chart.min.js"></script>
+<script src="{{asset('backend/plugins/chart.js/Chart.min.js')}}"></script>
 
 
-<script src="backend/dist/js/bootbox.min.js"></script>
+<script src="{{asset('backend/dist/js/bootbox.min.js')}}"></script>
 <!-- Page specific script -->
 
 @yield('scripts')
