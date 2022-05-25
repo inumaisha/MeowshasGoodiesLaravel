@@ -32,14 +32,23 @@ Route::post('/saveproduct', [ProductController::class, 'saveproduct']);
 Route::get('/editproduct/{id}', [ProductController::class, 'editproduct']);
 Route::post('/updateproduct', [ProductController::class, 'updateproduct']);
 Route::get('/addproduct', [ProductController::class, 'addproduct']);
+Route::get('/deleteproduct/{id}', [ProductController::class, 'deleteproduct']);
+Route::get('/activateProduct/{id}', [ProductController::class, 'activateProduct']);
+Route::get('/unactivateProduct/{id}', [ProductController::class, 'unactivateProduct']);
+Route::get('/view_product_by_category/{category_name}', [ProductController::class, 'view_product_by_category']);
+
+
 
 
 Route::get('/', [ClientController::class, 'home']);
 Route::get('/shop', [ClientController::class, 'shop']);
+Route::get('/addToCart/{id}', [ClientController::class, 'addToCart']);
+Route::get('/remove_from_cart/{id}', [ClientController::class, 'remove_from_cart']);
 Route::get('/cart', [ClientController::class, 'cart']);
 Route::get('/checkout', [ClientController::class, 'checkout']);
 Route::get('/login', [ClientController::class, 'login']);
 Route::get('/signup', [ClientController::class, 'signup']);
+Route::post('/creatingAccount', [ClientController::class, 'creatingAccount']);
 Route::get('/orders', [ClientController::class, 'orders']);
 
 // Route::get('/dashboard', function () {

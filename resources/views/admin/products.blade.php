@@ -78,19 +78,22 @@
             <td>{{$product->product_category}}</td>
                   <td>{{'£' .$product->product_price}}</td>
             <td>
-                      <a class="btn btn-warning" href="#">
-                          Activate
-                      </a>
+                   @if($product->status == 1)
+                   <a href="{{url('/unactivateProduct/'.$product->id)}}" class="btn btn-success">Unactivate</a>
+                   @else
+                   <a href="{{url('/activateProduct/'.$product->id)}}" class="btn btn-warning">Activate</a>
+                   @endif
+              
                       <a class="btn btn-info btn-sm" href="{{url('/editproduct/'.$product->id)}}">
                           <i class="fas fa-pencil-alt">
                           </i>
                           Edit
                       </a>
-                      <a class="btn btn-danger btn-sm" href="#">
-                          <i class="fas fa-trash">
+                      <a href="{{url('/deleteproduct/'.$product->id)}}" id="delete" class="btn btn-danger"><i class="nav-icon fas fa-trash"></i></a>
+                          {{-- <i class="fas fa-trash">
                           </i>
                           Delete
-                      </a>
+                      </a> --}}
                   </td>
               </tr>
               {{Form::hidden('', $increment = $increment + 1)}}
@@ -128,7 +131,7 @@
 <script src="backend/dist/js/bootbox.min.js"></script>
 
 <script>
-    $(document).on("click", "#delete", function(e){
+    $(document).on("click", "delete", function(e){
       e.preventDefault();
       var link = $(this).attr("href");
       bootbox.confirm("Do you really want to delete this element?", function(confirmed){

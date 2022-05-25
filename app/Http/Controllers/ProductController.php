@@ -44,6 +44,7 @@ class ProductController extends Controller
         $product->product_price = $request->input('product_price');
         $product->product_category = $request->input('product_category');
         $product->product_image = $fileNameToStore;
+        $product->status = 1;
 
         $product->save();
 
@@ -90,5 +91,34 @@ class ProductController extends Controller
         $product->update();
 
         return redirect('/products')->with('status', 'Product has been successfully updated.');
+        }
+
+        public function deleteproduct($id){
+            $product = Product::find($id);
+            if($product->product_image != 'noimage.jpg'){
+                Storage::delete('public/product_images/'.$product->product_image);
+            }
+            $product->delete();
+            return back()->with('status', 'Product has been successfully Deleted.');
+        }
+
+        public function activateProduct($id){
+            $product = Product::find($id);
+            $product->status = 1;
+            $product->update();
+            return back()->with('status', 'Product has been successfully activated.');
+        }
+
+        public function unactivateProduct($id){
+            $product = Product::find($id);
+            $product->status = 0;
+            $product->update();
+            return back()->with('status', 'Product has been successfully unactivated.');
+        }
+
+        public function view_product_by_category($category_name){
+            $products = Product::All()->where('product_category', $category_name)->where('status', 1);
+            $categories = Category::All();
+            return view('client.shop')->with('products', $products)->with('categories', $categories);
         }
 }
