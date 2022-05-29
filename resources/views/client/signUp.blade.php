@@ -18,6 +18,7 @@
   <input type="password" class="form-control" name="password" placeholder="Password" required=""/>      
 
   <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button> 
+<br>
 
   @if(count($errors) > 0)
   <div class="alert alert-danger">
@@ -36,7 +37,7 @@
 
   <hr>
   <div class="text-center p-t-90">
-    <a class="text" href="{{url('/login')}}">
+    <a class="text" href="{{url('/checkout')}}">
         Already have an account? Login now!
     </a>
 </div>  

@@ -42,6 +42,9 @@ Route::get('/view_product_by_category/{category_name}', [ProductController::clas
 
 Route::get('/', [ClientController::class, 'home']);
 Route::get('/shop', [ClientController::class, 'shop']);
+Route::get('/archive', [ClientController::class, 'archive']);
+Route::get('/about', [ClientController::class, 'about']);
+Route::get('/products/{id}', [ClientController::class, 'show'])->name("product.show");
 Route::get('/addToCart/{id}', [ClientController::class, 'addToCart']);
 Route::get('/remove_from_cart/{id}', [ClientController::class, 'remove_from_cart']);
 Route::get('/cart', [ClientController::class, 'cart']);
@@ -49,6 +52,9 @@ Route::get('/checkout', [ClientController::class, 'checkout']);
 Route::get('/login', [ClientController::class, 'login']);
 Route::get('/signup', [ClientController::class, 'signup']);
 Route::post('/creatingAccount', [ClientController::class, 'creatingAccount']);
+Route::post('/accessAccount', [ClientController::class, 'accessAccount']);
+Route::get('/logOut', [ClientController::class, 'logOut']);
+Route::post('/finalCheckout', [ClientController::class, 'finalCheckout']);
 Route::get('/orders', [ClientController::class, 'orders']);
 
 // Route::get('/dashboard', function () {
@@ -56,3 +62,7 @@ Route::get('/orders', [ClientController::class, 'orders']);
 // })->middleware(['auth'])->name('dashboard');
 
 // require __DIR__.'/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

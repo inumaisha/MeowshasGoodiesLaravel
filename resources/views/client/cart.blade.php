@@ -11,23 +11,7 @@ Cart
 		
 		<div class="relative">
 			<div class="panel panel-info">
-				
-				{{-- <div class="panel-heading">
-					<div class="panel-title">
-						<div class="row">
-							<div class="col-xs-6">
-								<h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
-							</div>
-							<div class="col-xs-6">
-								<button type="button" class="btn btn-primary btn-sm btn-block">
-									<span class="glyphicon glyphicon-share-alt"></span> Continue shopping
-								</button>
-							</div>
-						</div>
-					</div>
-				</div> --}}
-				
-				<div class="panel-body">
+			<div class="panel-body">
 					@if(Session::has('cart'))
 					@foreach ($products as $product)
 					<div class="row">
@@ -51,26 +35,15 @@ Cart
 						</div>
 					</div>
 					@endforeach
-
 					@else
-
-					@endif
-					
-				
-
-					<hr>
-					<div class="row">
-						<div class="text-center">
-							<div class="col-xs-9">
-								<h6 class="text-right">Added items?</h6>
-							</div>
-							<div class="col-xs-3">
-								<button type="button" class="btn btn-default btn-sm btn-block">
-									Update cart
-								</button>
-							</div>
-						</div>
+					@if(Session::has('status'))
+					<div class="alert alert-success">
+						{{Session::get('status')}}
 					</div>
+					@endif
+					@endif
+				<hr>
+				
 				</div>
 				<div class="panel-footer">
 					<div class="row text-center">

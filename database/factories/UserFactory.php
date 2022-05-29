@@ -3,13 +3,16 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
+use Faker\Generator as Faker;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
 class UserFactory extends Factory
 {
+    use WithFaker;
     /**
      * Define the model's default state.
      *
@@ -18,6 +21,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
+            
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
@@ -39,4 +43,5 @@ class UserFactory extends Factory
             ];
         });
     }
+
 }

@@ -48,6 +48,15 @@
                         Client Name
                     </th>
                     <th>
+                      Client Address
+                  </th>
+                  <th>
+                    Client Country
+                </th>
+                <th>
+                  Client Postcode
+              </th>
+                    <th>
                        Orders
                     </th>
                       <th>
@@ -56,32 +65,26 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr>
-                      <td>
-                          2020
-                      </td>
-                    
-                <td> Maisha
-                      </td>
-                      <td> 5</td>
-                      <td>
-                          <a class="btn btn-primary" href="#"><i class="nav-icon fas fa-eye"></i>
-                          </a> 
-                      </td>
-                        </tr>
-                        <td>
-                            2020
-                        </td>
-                      
-                  <td> Maisha
-                        </td>
-                        <td> 5</td>
-                        <td>
-                            <a class="btn btn-primary" href="#"><i class="nav-icon fas fa-eye"></i>
-                            </a> 
-                        </td>
-                 
-                  </tr>
+                @foreach ($orders as $order)
+                <tr>
+                  <td>{{$order->created_at}}</td>
+          <td> {{$order->name}}</td>
+          <td> {{$order->address}}</td>
+          <td> {{$order->country}}</td>
+          <td> {{$order->postcode}}</td>
+          <td>
+          @foreach ($order->cart->items as $item)
+                    {{$item['product_name'].', '}}
+          @endforeach
+          </td>
+                  {{-- <td> {{$order->cart}}</td> --}}
+                  <td><a class="btn btn-primary" href="#"><i class="nav-icon fas fa-eye"></i>
+                      </a></td>
+                    </tr>
+                   
+             
+              @endforeach
+                
               </tbody>
           </table>
         </div>
